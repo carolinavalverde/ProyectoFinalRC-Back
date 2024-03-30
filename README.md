@@ -25,7 +25,7 @@ _ mongoose (^8.2.1): Biblioteca de modelado de objetos para MongoDB y Node.js qu
 _ morgan (^1.10.0): Middleware para Express que registra solicitudes HTTP en la consola del servidor con formato personalizable.
 
 ## 3. Instalación y Uso
-Clona el repositorio: git clone https://github.com/carolinavalverde/E04-PaletaDeColoresBack
+Clona el repositorio: git clone https://github.com/carolinavalverde/ProyectoFinalRC-Back
 
 ## 4. Contribución
 Si deseas contribuir a este proyecto, sigue los pasos a continuación:
