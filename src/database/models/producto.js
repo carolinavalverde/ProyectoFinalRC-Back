@@ -24,7 +24,23 @@ const productoSchema = new Schema({
       },
     },
   },
- 
+  categoria: {
+    type: String,
+    required: true,
+    enum:['Infusiones', 'Batidos', 'Dulce', 'Salado']
+  },
+  descripcion_breve: {
+    type: String,
+    required: true,
+    minLength: 10,
+    maxLength: 50,
+  },
+  descripcion_amplia: {
+    type: String,
+    required: true,
+    minLength: 30,
+    maxLength: 300,
+  },
 });
 //aqui creamos un modelo
 const Producto = mongoose.model('producto', productoSchema); //ponerlo siempre en singular xq adiciona una s para crear la coleccion
