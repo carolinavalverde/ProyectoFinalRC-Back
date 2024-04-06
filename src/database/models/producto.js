@@ -11,7 +11,7 @@ const productoSchema = new Schema({
   precio: {
     type: Number,
     required: true,
-    min: 100, //prueba para ver si funciona con valor negativo, si no lo ponemos si dejaria
+    min: 100, 
     max: 10000,
   },
   imagen: {
@@ -27,7 +27,7 @@ const productoSchema = new Schema({
   categoria: {
     type: String,
     required: true,
-    enum:['Infusiones', 'Batidos', 'Dulce', 'Salado']
+    enum:['Entradas', 'Platillos', 'Bebidas', 'Postres']
   },
   descripcion_breve: {
     type: String,
@@ -42,7 +42,7 @@ const productoSchema = new Schema({
     maxLength: 300,
   },
 });
-//aqui creamos un modelo
-const Producto = mongoose.model('producto', productoSchema); //ponerlo siempre en singular xq adiciona una s para crear la coleccion
+
+const Producto = mongoose.model('producto', productoSchema); 
 
 export default Producto;
