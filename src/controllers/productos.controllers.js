@@ -9,6 +9,12 @@ export const editarProducto = async(req, res) => {
       // si no existe, contestar con un status 404
       if (!productoBuscado) {
         return res.status(404).json({ mensaje: 'El id enviado no corresponde a ningun producto' })
-      } 
-
-      
+      }
+      // modificar el producto y enviar la respuesta 400
+      await Producto.findByIdAndUpdate(req.params.id, req.body, { new: true }) // Agregar { new: true } para devolver el producto actualizado
+      res.status(200).json({ mensaje: 'El producto fue editado correctamente' })
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ mensaje: 'Error al editar el producto' })
+    }
+  };
