@@ -1,30 +1,11 @@
-import { Router } from "express";
-import {
-  borrarProducto,
-  crearProducto,
-  editarProducto,
-  listarProductos,
-  obtenerProducto,
-} from "../controllers/productos.controllers.js";
-import { check } from "express-validator";
-import validacionProducto from "../helpers/validacionProducto.js";
+import { validationResult } from "express-validator";
 
-const router = Router();
+const resultadoValidacion = (req, res, next)=>{
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+     return res.status(400).json({errores: errors.array()})
+    }
+    next();
+}
 
-router.get('/', (req, res) => {
-  console.log('Aquí se obtendrá la lista de todos los productos');
-  res.send('Aquí enviaremos la lista de productos');
-});
-
-router
-  .route("/productos")
-  .get(listarProductos)
-  .post([validacionProducto], crearProducto);
-
-router
-  .route("/productos/:id")
-  .get(obtenerProducto)
-  .put(editarProducto)
-  .delete(borrarProducto);
-
-export default router;
+export default resultadoValidacion
