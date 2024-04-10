@@ -62,3 +62,15 @@ export const borrarProducto = async (req, res) => {
     res.status(500).json({ mensaje: "Error al borrar el producto" });
   }
 };
+
+// funcion que debo crear en el backend
+
+export const crearProducto = async(req, res)=>{
+  try {
+
+    const productoNuevo = new Producto(req.body);
+   
+  } catch (error) {
+   
+  }  
+}
