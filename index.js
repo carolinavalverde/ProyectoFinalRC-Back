@@ -3,6 +3,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import morgan from 'morgan';
 import productosRouter from './src/routes/productos.routes.js';
+import usuarioRouter from './src/routes/usuario.routes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import './src/database/database.js'
@@ -23,3 +24,4 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "/public")))
 
 app.use("/api", productosRouter)
+app.use("/api/usuario", usuarioRouter)
