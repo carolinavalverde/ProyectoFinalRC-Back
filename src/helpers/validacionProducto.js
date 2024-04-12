@@ -23,7 +23,7 @@ const validacionProducto = [
         .notEmpty()
         .withMessage("La categoría es un dato obligatorio")
         .isIn(["Entradas", "Platillos", "Bebidas", "Postres"])
-        .withMessage("La categoría debe ser Infusiones, Batidos, Dulce o Salado"),
+        .withMessage("La categoría debe ser Entradas, Platillos, Bebidas o Postres"),
     check("imagen")
         .notEmpty()
         .withMessage("La imagen es un dato obligatorio")
