@@ -1,0 +1,18 @@
+section {
+  position: relative;
+}
+h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+  font-size: 5rem;
+}
+img {
+  width: 100%;
+  display: block;
+}
