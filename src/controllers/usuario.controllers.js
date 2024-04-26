@@ -49,7 +49,7 @@ export const login = async (req, res) => {
       .json({
         mensaje: "El usuario existe",
         email: usuarioBuscado.email,
-        usuario: usuarioBuscado.nombreUsuario,
+        usuario: usuarioBuscado.nombreApellido,
         rol: usuarioBuscado.rol,
       });
   } catch (error) {
