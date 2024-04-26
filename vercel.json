@@ -1,18 +1,10 @@
 {
-  "builds": [
-    {
+  "builds":[{
       "src": "./index.js",
-      "use": "@vercel/node",
-      "env": {
-        "VITE_API_PRODUCTO": "https://vermont-restaurant.vercel.app/api/productos",
-        "VITE_API_USUARIO": "https://vermont-restaurant.vercel.app/api/usuario"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ]
+      "use":"@vercel/node"
+  }],
+  "routes":[{
+      "src":"/(.*)",
+      "dest":"/"
+  }]
 }
