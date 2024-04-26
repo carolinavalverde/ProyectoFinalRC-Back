@@ -7,10 +7,9 @@ export const login = async (req, res) => {
     console.log(req.body);
     const { email, password } = req.body;
     const usuarioBuscado = await Usuario.findOne({ email });
+
     if (!usuarioBuscado) {
-      return res
-        .status(400)
-        .json({ mensaje: "Correo o password incorrecto - correo" });
+      return res.status(400).json({ mensaje: "Usuario no encontrado" });
     }
 
     const passValido = bcrypt.compareSync(password, usuarioBuscado.password);
@@ -18,13 +17,13 @@ export const login = async (req, res) => {
     if (!passValido) {
       return res
         .status(400)
-        .json({ mensaje: "Correo o password incorrecto - password" });
+        .json({ mensaje: "Correo o contraseña incorrectos" });
     }
 
     const token = await generarJWT(usuarioBuscado._id, usuarioBuscado.email);
 
     res.status(200).json({
-      mensaje: "El usuario existe",
+      mensaje: "Inicio de sesión exitoso",
       email: usuarioBuscado.email,
       token: token,
     });

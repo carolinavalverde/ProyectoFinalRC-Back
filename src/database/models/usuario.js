@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const usuarioSchema = new Schema({
-  nombreUsuario: {
+  nombreApellido: {
     type: String,
     minLength: 2,
     maxlength: 30,
