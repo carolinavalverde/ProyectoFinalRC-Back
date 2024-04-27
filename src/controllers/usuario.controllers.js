@@ -1,4 +1,4 @@
-import Usuario from "../database/model/usuario.js";
+import Usuario from "../database/models/usuario.js";
 import bcrypt from "bcrypt";
 
 export const crearUsuario = async (req, res) => {
@@ -26,6 +26,7 @@ export const crearUsuario = async (req, res) => {
     });
   }
 };
+
 export const login = async (req, res) => {
   try {
     const { email, contraseña } = req.body;
@@ -44,14 +45,12 @@ export const login = async (req, res) => {
         mensaje: "Correo o password incorrecto",
       });
     }
-    res
-      .status(200)
-      .json({
-        mensaje: "El usuario existe",
-        email: usuarioBuscado.email,
-        usuario: usuarioBuscado.nombreApellido,
-        rol: usuarioBuscado.rol,
-      });
+    res.status(200).json({
+      mensaje: "El usuario existe",
+      email: usuarioBuscado.email,
+      usuario: usuarioBuscado.nombreApellido,
+      rol: usuarioBuscado.rol,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -59,6 +58,7 @@ export const login = async (req, res) => {
     });
   }
 };
+
 export const listarUsuarios = async (req, res) => {
   try {
     const usuarios = await Usuario.find();
