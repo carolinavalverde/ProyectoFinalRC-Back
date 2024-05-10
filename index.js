@@ -14,11 +14,14 @@ app.listen(app.get("port"), () => {
   console.log("Estoy en el puerto " + app.get("port"));
 });
 
-app.use(cors({
-    origin: 'https://prueba-restaurant.netlify.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: "https://prueba-restaurant.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(morgan("dev"));
 app.use(express.json());
