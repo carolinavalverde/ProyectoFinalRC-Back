@@ -1,6 +1,5 @@
 import express from "express";
 import "dotenv/config";
-import cors from "cors";
 import morgan from "morgan";
 import productosRouter from "./src/routes/productos.routes.js";
 import usuarioRouter from "./src/routes/usuario.routes.js";
@@ -16,19 +15,17 @@ app.listen(app.get("port"), () => {
   console.log("Estoy en el puerto " + app.get("port"));
 });
 
-app.use(cors({
-    origin: "https://prueba-restaurant.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-}));
-
-app.options('*', cors({
-    origin: "https://prueba-restaurant.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-}));
+// Middleware para manejar los encabezados CORS
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://prueba-restaurant.netlify.app"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.use(morgan("dev"));
 app.use(express.json());
