@@ -16,24 +16,19 @@ app.listen(app.get("port"), () => {
   console.log("Estoy en el puerto " + app.get("port"));
 });
 
-app.use(
-  cors({
-    origin: "https://prueba-restaurant.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+// Configuración detallada del middleware cors
+const corsOptions = {
+  origin: "https://prueba-restaurant.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 200, 
+};
 
-app.options(
-  "*",
-  cors({
-    origin: "https://prueba-restaurant.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
+
+// Middleware para manejar el preflight CORS
+app.options("*", cors(corsOptions));
 
 app.use(morgan("dev"));
 app.use(express.json());
@@ -41,16 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-app.use(
-  express.static(path.join(__dirname, "/public"), (req, res, next) => {
-    console.log(
-      "Archivos estáticos servidos desde: ",
-      path.join(__dirname, "/public")
-    );
-    next();
-  })
-);
+app.use(express.static(path.join(__dirname, "/public")));
 
 app.use("/api", productosRouter);
 app.use("/api/usuario", usuarioRouter);
