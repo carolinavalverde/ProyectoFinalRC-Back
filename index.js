@@ -14,7 +14,9 @@ app.listen(app.get("port"), ()=>{
     console.log('Estoy en el puerto '+app.get('port'))
 })
 
-app.use(cors()); 
+app.use(cors({
+    origin: 'https://prueba-restaurant.netlify.app'
+})); 
 app.use(morgan('dev')); 
 app.use(express.json()); 
 app.use(express.urlencoded({extended:true})); 
