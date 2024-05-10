@@ -4,7 +4,7 @@ import validacionUsuario from "../helpers/validacionUsuario.js";
 
 const router = Router();
 
-router.route('/').post(login)
+router.post('/login', login);
 router.post('/nuevo', validacionUsuario, crearUsuario);
 router.route('/').get(listarUsuarios)
 
