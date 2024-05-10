@@ -41,7 +41,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use(express.static(path.join(__dirname, "/public")));
+
+app.use(
+  express.static(path.join(__dirname, "/public"), (req, res, next) => {
+    console.log(
+      "Archivos estáticos servidos desde: ",
+      path.join(__dirname, "/public")
+    );
+    next();
+  })
+);
 
 app.use("/api", productosRouter);
 app.use("/api/usuario", usuarioRouter);
