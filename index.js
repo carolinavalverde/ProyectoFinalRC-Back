@@ -16,42 +16,27 @@ app.listen(app.get("port"), () => {
   console.log("Estoy en el puerto " + app.get("port"));
 });
 
+app.use(cors({
+    origin: "https://prueba-restaurant.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
+
+app.options('*', cors({
+    origin: "https://prueba-restaurant.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configuración detallada del middleware cors
-const corsOptions = {
-  origin: "https://prueba-restaurant.netlify.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-
-// Middleware para manejar el preflight CORS
-app.options("*", cors(corsOptions));
-
-// Middleware para manejar las solicitudes a la API de productos
-app.use(
-  "/api/productos",
-  (req, res, next) => {
-    res.header(
-      "Access-Control-Allow-Origin",
-      "https://prueba-restaurant.netlify.app"
-    );
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  },
-  productosRouter
-);
-
-// Middleware para manejar las solicitudes a la API de usuarios
-app.use("/api/usuario", usuarioRouter);
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "/public")));
+
+app.use("/api", productosRouter);
+app.use("/api/usuario", usuarioRouter);
